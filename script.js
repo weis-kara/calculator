@@ -19,9 +19,9 @@ function updateDisplay() {
 function appNumber(number) {
     displayValue += number;
     updateDisplay();
-    valTemp += number;
+    valTemp += number;  // 
     //alert(displayValue,valTemp);
-    return valTemp
+   //return valTemp
 }
 
 // Функция для добавления оператора к текущему значению
@@ -89,6 +89,7 @@ function calculate() {
         setTimeout(function() {
             numValue+=1;
             val.push(parseFloat(valTemp));
+            alert(numValue + ';' + val);
             let rez= parseFloat(val[0] + '+' + val[1]);
             //let rez= parseFloat(displayValue);
                         

@@ -19,9 +19,7 @@ function updateDisplay() {
 function appNumber(number) {
     displayValue += number;
     updateDisplay();
-    valTemp += number;  // 
-    //alert(displayValue,valTemp);
-   //return valTemp
+    valTemp += number;  
 }
 
 // Функция для добавления оператора к текущему значению
@@ -32,8 +30,8 @@ function appOperator(operator) {
     numOperator+=1;
     val.push(parseFloat(valTemp));
     smbOperator.push(operator);
-    /*alert(val);
-    alert(smbOperator);*/
+    //*alert(val);
+    //alert(smbOperator);
     valTemp='';
     
     return [valTemp,numValue,numOperator,val,smbOperator];
@@ -89,11 +87,32 @@ function calculate() {
         setTimeout(function() {
             numValue+=1;
             val.push(parseFloat(valTemp));
-            alert(numValue + ';' + val);
-            let rez= parseFloat(val[0] + '+' + val[1]);
-            //let rez= parseFloat(displayValue);
-                        
-            alert('=;' + rez);
+            for (let i = 0; i<val.length; i++){
+                if (smbOperator[i] == '*'){
+                    val[i] = val[i] * val[i+1];
+                    val.splice([i+1],1);
+                    smbOperator.splice([i],1);
+                }
+            }
+            for (let i = 0; i<val.length; i++){
+                if (smbOperator[i] == '/'){
+                    val[i] = val[i] / val[i+1];
+                    val.splice([i+1],1);
+                    smbOperator.splice([i],1);
+                }
+            }
+            rez = val[0];
+            for (let i = 0; i<smbOperator.length; i++){
+                if(smbOperator[i] == '+'){
+                    rez += val[i+1];
+                    continue; 
+                }else(smbOperator[i] == '-')
+                {
+                    rez-=val[i+1];
+                    continue;
+                }
+            }
+            alert('результат =' + rez);
             numValue=null; 
             numOperator=null;
             val.length=0;

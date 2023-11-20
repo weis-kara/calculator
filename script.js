@@ -2,7 +2,7 @@
 let displayValue = ''; 
 let numValue=null;      //количество слагаемых
 let numOperator=null;   //количество операторов
-let val=[];           //текущее слагаемое
+let val=[];           //текущее слагаемое число, включая "."
 let smbOperator=[];      //текущий оператор
 let valTemp='';
 let rez=null
@@ -29,10 +29,8 @@ function appOperator(operator) {
     numValue+=1;
     numOperator+=1;
     val.push(parseFloat(valTemp)); //добавляем текущее число в массив 
-    smbOperator.push(operator);  // и закидываем в массив операторы
-    //*alert(val);
-    //alert(smbOperator);
-    valTemp='';
+    smbOperator.push(operator);  // и закидываем в массив оператор
+     valTemp='';
     
     return [valTemp,numValue,numOperator,val,smbOperator];
 }
@@ -83,15 +81,15 @@ function recallMemory() {
 function calculate() {
     try {
         displayValue = eval(displayValue).toString();
-        updateDisplay();
+        updateDisplay(); // оставила эту ф-цию для проверки
         setTimeout(function() {
             numValue+=1;
-            val.push(parseFloat(valTemp));
+            val.push(parseFloat(valTemp)); //в первую очередь вычислем умножение и деление чисел 
             for (let i = 0; i<val.length; i++){
                 if (smbOperator[i] == '*'){
                     val[i] = val[i] * val[i+1];
-                    val.splice([i+1],1);
-                    smbOperator.splice([i],1);
+                    val.splice([i+1],1); //удаляем второе число и знак из массивов,
+                    smbOperator.splice([i],1); // в первое значение записываем результат
                 }
             }
             for (let i = 0; i<val.length; i++){
@@ -101,6 +99,7 @@ function calculate() {
                     smbOperator.splice([i],1);
                 }
             }
+            // последовательно считаем сумму или разницу
             rez = val[0];
             for (let i = 0; i<smbOperator.length; i++){
                 if(smbOperator[i] == '+'){
@@ -112,7 +111,7 @@ function calculate() {
                     continue;
                 }
             }
-            alert('результат =' + rez);
+            alert('результат =' + rez); //итоговый результат
             numValue=null; 
             numOperator=null;
             val.length=0;

@@ -19,7 +19,7 @@ function updateDisplay() {
 function appNumber(number) {
     displayValue += number;
     updateDisplay();
-    valTemp += number;  
+    valTemp += number;  //записываем введенные цифры в буферную переменную
 }
 
 // Функция для добавления оператора к текущему значению
@@ -28,8 +28,8 @@ function appOperator(operator) {
     updateDisplay();
     numValue+=1;
     numOperator+=1;
-    val.push(parseFloat(valTemp));
-    smbOperator.push(operator);
+    val.push(parseFloat(valTemp)); //добавляем текущее число в массив 
+    smbOperator.push(operator);  // и закидываем в массив операторы
     //*alert(val);
     //alert(smbOperator);
     valTemp='';
